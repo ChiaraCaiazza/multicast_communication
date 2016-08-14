@@ -2,6 +2,7 @@
 
 #define GROUP "239.137.194.111"
 #define PORT 55501
+#define BUF_LEN 100
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -47,17 +48,17 @@ int main(){
 	}
 	
 	bzero(&sender_addr, sizeof(sender_addr));
-	buf = malloc(100);
+	buf = malloc(BUF_LEN);
 	socklen_t size = sizeof(sender_addr);
 
 	printf("\nWaiting for a message...\n");
 
-        ret = recvfrom(sock, buf, 5, 0, (struct sockaddr*)&sender_addr, &size);
+        ret = recvfrom(sock, buf, BUF_LEN, 0, (struct sockaddr*)&sender_addr, &size);
         if (ret<0) {
        		printf("Error in recvfrom()\n");
 		exit(1);
         }
-        printf("Message received: %s\n\n", buf);
+        printf("Message received: \"%s\"\n\n", buf);
 	
 	return 0;	
 }

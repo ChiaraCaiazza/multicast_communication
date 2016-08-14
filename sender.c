@@ -2,6 +2,7 @@
 
 #define GROUP "239.137.194.111"
 #define PORT 55501
+#define BUF_LEN 100
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -30,7 +31,7 @@ int main(){
 	receiver_addr.sin_port = htons(PORT);
 	inet_aton(GROUP, &receiver_addr.sin_addr);
 	
-	buf = malloc(100);
+	buf = malloc(BUF_LEN);
 	printf("\nInsert the message to send:\t");
 	scanf("%s", buf);
 	
@@ -40,7 +41,7 @@ int main(){
 		exit(1);
 	}
 
-	printf("Sent \"%s\"...\n\n", buf);
+	printf("Message sent: \"%s\"\n\n", buf);
 
 	return 0;	
 }
